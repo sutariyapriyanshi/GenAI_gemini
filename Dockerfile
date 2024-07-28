@@ -1,5 +1,5 @@
 # Dockerfile
-FROM python:3.12.2-slim-buster
+FROM python:3.12.2
 
 WORKDIR /app
 
