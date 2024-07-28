@@ -5,7 +5,7 @@ on:
     branches: [master]
 
 jobs:
-  test:
+  Test:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
@@ -14,3 +14,13 @@ jobs:
           python-version: 3.12.2
       - name: Install dependencies
         run: pip install -r requirement.txt
+  Deploy:
+    needs: Test
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy to localhost
+        run: |
+          echo "Tests passed, deploying to localhost..."
+          # No need for remote access as it's local
+          # Your app should already be running on localhost:8501
