@@ -1,11 +1,11 @@
-name: CI
+name: CI CD pipeline
 
 on:
   push:
     branches: [ master ]
 
 jobs:
-  build-and-test:
+  build_and_test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -13,14 +13,24 @@ jobs:
         with:
           python-version: '3.12.2'
       - name: Install dependencies
-        run: pip install -r requirement.txt
+        run: pip install -r requirements.txt
       - name: Run tests
         run: pytest
       - name: Build
         run: |
-          # Build commands
+          # Build commands here (if necessary)
+      - name: Deployment Reminder
+        run: echo "**Deployment required!** Run 'streamlit run app.py' to deploy the application manually."
+  deploy:  # Add a separate job for deployment
+    runs-on: ubuntu-latest
+    needs: build_and_test  # Wait for build_and_test job to finish
+    steps:
+      - uses: actions/checkout@v3
       - name: Deploy
         uses: actions/deploy@v1
         with:
-          app-name: my-app
+          app-name: app
           api-key: ${{ secrets.GOOGLE_API_KEY }}  # Access secret using ${{ secrets.SECRET_NAME }}
+        run: |
+          # Assuming app.py is in the root of your repository
+          streamlit run app.py
