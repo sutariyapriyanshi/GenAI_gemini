@@ -1,0 +1,7 @@
+# Python
+.pytest_cache/
+__pycache__/
+.ipnyb_checkpoints/
+.env/
+venv/
+myenv/

@@ -2,7 +2,6 @@ from dotenv import load_dotenv
 import streamlit as st
 import os
 import google.generativeai as genai
-import pathlib
 from youtube_transcript_api import YouTubeTranscriptApi
 
 
