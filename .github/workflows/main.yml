@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.12.2'
+      - name: Install dependencies
+        run: pip install -r requirement.txt
+      - name: Run tests
+        run: pytest
+      - name: Build
+        run: |
+          # Build commands
+      - name: Deploy
+        uses: actions/deploy@v1
+        with:
+          app-name: my-app
+          api-key: ${{ secrets.GOOGLE_API_KEY }}  # Access secret using ${{ secrets.SECRET_NAME }}
